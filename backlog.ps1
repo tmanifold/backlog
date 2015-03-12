@@ -47,6 +47,17 @@ param(
 	[switch]$help
 )
 
+# Gets a variable from the ini file at line_num
+function GetINIValue {
+    param ([int] $line_num)
+
+    $equ_index = $ini_file[$line_num].IndexOf("=")
+   
+    $val = $ini_file[$line_num].Substring($equ_index + 1, $ini_file[$line_num].Length - $equ_index - 1)
+
+    return $val
+}
+
 # Initialize backlog.ini
 if (-NOT (Test-Path $PSScriptRoot\backlog.ini)) {
 
@@ -59,6 +70,7 @@ if (-NOT (Test-Path $PSScriptRoot\backlog.ini)) {
 } else {
     $ini_file = Get-Content $PSScriptRoot\backlog.ini
 }
+
 
 $szip = GetINIValue 0
 $destination = GetINIValue 1
@@ -191,8 +203,7 @@ if ($help) {
 	Write-Output "Name:  Backlog"
 	Write-Output "Usage: backlog [OPTION]... [OPTION][PATH]..."
 	Write-Output "Use 7-zip to create an archive of directories and files specified"
-	Write-Output " in backlog.dat at maximum compression ratio. Archives will be stored"
-	Write-Output " in the location held in the destination variable"
+	Write-Output " in backlog.dat at maximum compression ratio."
 	Write-Output ""
 	Write-Output "	-backup			Begin the backup sequence"
 	Write-Output "	-target			Specify a target directory for backup"
@@ -208,14 +219,3 @@ if ($help) {
 	Write-Output ""
 }
 
-
-# Gets a variable from the ini file at line_num
-function GetINIValue {
-    param ([int] $line_num)
-
-    $equ_index = $ini_file[$line_num].IndexOf("=")
-   
-    $val = $ini_file[$line_num].Substring($equ_index + 1, $ini_file[$line_num].Length - $equ_index - 1)
-
-    return $val
-}
