@@ -194,8 +194,8 @@ if ($list) {
 
 if ($log) {
 	# Get the log file from the most recent backup directory
-	$folder = Get-ChildItem "D:\backlog" | select -last 1
-	cat D:\backlog\$folder\*.log
+	$folder = Get-ChildItem "$destination" | select -last 1
+	cat $destination\$folder\*.log
 }
 
 if ($help) {
