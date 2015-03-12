@@ -80,13 +80,14 @@ $delete_age  = GetINIValue 3
 Set-Alias SZip $szip
 
 $date 		 = Get-Date -Format yyyy.MM.dd
-$destination = $destination
+#$destination = $destination
+<#
 $secondary   = "C:$env:HomePath\backlog\$date"
-#>
+
 if (-NOT (Test-Path "D:\")) {
     $destination = $secondary
 }
-
+#>
 # Create the directory list if it doesn't exist
 if (Test-Path $PSScriptRoot\backlog.dat){
      $source = Get-Content $PSScriptRoot\backlog.dat
