@@ -80,14 +80,13 @@ $delete_age  = GetINIValue 3
 Set-Alias SZip $szip
 
 $date 		 = Get-Date -Format yyyy.MM.dd
-#$destination = $destination
-<#
+$destination = $destination
 $secondary   = "C:$env:HomePath\backlog\$date"
-
+#>
 if (-NOT (Test-Path "D:\")) {
     $destination = $secondary
 }
-#>
+
 # Create the directory list if it doesn't exist
 if (Test-Path $PSScriptRoot\backlog.dat){
      $source = Get-Content $PSScriptRoot\backlog.dat
@@ -137,7 +136,7 @@ if ($backup) {
 
 	}
 	
-	SZip l $destination\$date.7z >> $logfile
+	SZip l $destination\$date\$date.7z >> $logfile
 
     if ($delete_old -and $delete_age -gt 0) {
         # Delete backups older than $delete_age
