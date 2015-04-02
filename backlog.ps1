@@ -83,7 +83,7 @@ $date 		 = Get-Date -Format yyyy.MM.dd
 $destination = $destination
 $secondary   = "C:$env:HomePath\backlog\$date"
 #>
-if (-NOT (Test-Path "D:\")) {
+if (-NOT (Test-Path $destination)) {
     $destination = $secondary
 }
 
